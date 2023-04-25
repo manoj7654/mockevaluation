@@ -16,7 +16,7 @@ flightRouter.get("/flights",async(req,res)=>{
     const query=req.query
     try {
         const result=await FlightModal.find(query);
-        res.status(200).send(result)
+        res.send(result)
     } catch (error) {
         console.log(error)
         res.json("Something went wrong")
@@ -31,7 +31,7 @@ flightRouter.get("/flights/:id",async(req,res)=>{
     const Id=req.params.id
     try {
         const result=await FlightModal.find({_id:Id});
-        res.status(200).send(result)
+        res.send(result)
     } catch (error) {
         console.log(error)
         res.json("Something went wrong")
@@ -47,7 +47,7 @@ flightRouter.post("/flights",async(req,res)=>{
     try {
         let flight=new FlightModal(payload);
         flight.save();
-        res.status(201).json({"message":"Flight has been added"})
+        res.json({"message":"Flight has been added"})
     } catch (error) {
         console.log(error)
         res.json({"message":"getting error posting data"})
@@ -65,7 +65,7 @@ flightRouter.patch("/flights/:id",async(req,res)=>{
     try {
         await FlightModal.findByIdAndUpdate({_id:Id},payload);
     
-        res.status(204).json({"message":"Flight has been updated"})
+        res.json({"message":"Flight has been updated"})
     } catch (error) {
         console.log(error)
         res.json({"message":"getting error updating data"})
@@ -82,7 +82,7 @@ flightRouter.delete("/flights/:id",async(req,res)=>{
     try {
         await FlightModal.findByIdAndDelete({_id:Id});
     
-        res.status(202).json({"message":"Flight has been deleted"})
+        res.json({"message":"Flight has been deleted"})
     } catch (error) {
         console.log(error)
         res.json({"message":"getting error updating data"})
